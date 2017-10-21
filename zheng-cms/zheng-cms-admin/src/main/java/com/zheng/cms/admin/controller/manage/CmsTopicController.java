@@ -9,6 +9,7 @@ import com.zheng.cms.dao.model.CmsTopic;
 import com.zheng.cms.dao.model.CmsTopicExample;
 import com.zheng.cms.rpc.api.CmsTopicService;
 import com.zheng.common.base.BaseController;
+import com.zheng.common.util.StringUtil;
 import com.zheng.common.validator.LengthValidator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -57,7 +58,7 @@ public class CmsTopicController extends BaseController {
 			@RequestParam(required = false, value = "order") String order) {
 		CmsTopicExample cmsTopicExample = new CmsTopicExample();
 		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-			cmsTopicExample.setOrderByClause(sort + " " + order);
+			cmsTopicExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
 		}
 		List<CmsTopic> rows = cmsTopicService.selectByExampleForOffsetPage(cmsTopicExample, offset, limit);
 		long total = cmsTopicService.countByExample(cmsTopicExample);

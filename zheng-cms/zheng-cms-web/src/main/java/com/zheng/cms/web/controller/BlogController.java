@@ -7,6 +7,7 @@ import com.zheng.cms.rpc.api.*;
 import com.zheng.common.base.BaseController;
 import com.zheng.common.util.Paginator;
 import com.zheng.common.util.RequestUtil;
+import com.zheng.common.util.StringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -88,7 +89,7 @@ public class BlogController extends BaseController {
                 .andStatusEqualTo((byte) 1)
                 .andSystemIdEqualTo(system.getSystemId());
         if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-            cmsArticleExample.setOrderByClause(sort + " " + order);
+            cmsArticleExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
         }
         List<CmsArticle> articles = cmsArticleService.selectByExampleForOffsetPage(cmsArticleExample, (page - 1) * rows, rows);
         model.addAttribute("articles", articles);

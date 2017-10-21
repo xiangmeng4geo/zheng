@@ -4,6 +4,7 @@ import com.baidu.unbiz.fluentvalidator.ComplexResult;
 import com.baidu.unbiz.fluentvalidator.FluentValidator;
 import com.baidu.unbiz.fluentvalidator.ResultCollectors;
 import com.zheng.common.base.BaseController;
+import com.zheng.common.util.StringUtil;
 import com.zheng.common.validator.LengthValidator;
 import com.zheng.upms.common.constant.UpmsResult;
 import com.zheng.upms.common.constant.UpmsResultConstant;
@@ -58,7 +59,7 @@ public class UpmsOrganizationController extends BaseController {
             @RequestParam(required = false, value = "order") String order) {
         UpmsOrganizationExample upmsOrganizationExample = new UpmsOrganizationExample();
         if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-            upmsOrganizationExample.setOrderByClause(sort + " " + order);
+            upmsOrganizationExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
         }
         if (StringUtils.isNotBlank(search)) {
             upmsOrganizationExample.or()

@@ -9,6 +9,7 @@ import com.zheng.cms.dao.model.CmsPage;
 import com.zheng.cms.dao.model.CmsPageExample;
 import com.zheng.cms.rpc.api.CmsPageService;
 import com.zheng.common.base.BaseController;
+import com.zheng.common.util.StringUtil;
 import com.zheng.common.validator.LengthValidator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -57,7 +58,7 @@ public class CmsPageController extends BaseController {
 			@RequestParam(required = false, value = "order") String order) {
 		CmsPageExample cmsPageExample = new CmsPageExample();
 		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-			cmsPageExample.setOrderByClause(sort + " " + order);
+			cmsPageExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
 		}
 		List<CmsPage> rows = cmsPageService.selectByExampleForOffsetPage(cmsPageExample, offset, limit);
 		long total = cmsPageService.countByExample(cmsPageExample);

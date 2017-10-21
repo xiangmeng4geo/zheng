@@ -9,6 +9,7 @@ import com.zheng.cms.dao.model.CmsTag;
 import com.zheng.cms.dao.model.CmsTagExample;
 import com.zheng.cms.rpc.api.CmsTagService;
 import com.zheng.common.base.BaseController;
+import com.zheng.common.util.StringUtil;
 import com.zheng.common.validator.LengthValidator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -57,7 +58,7 @@ public class CmsTagController extends BaseController {
 			@RequestParam(required = false, value = "order") String order) {
 		CmsTagExample cmsTagExample = new CmsTagExample();
 		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-			cmsTagExample.setOrderByClause(sort + " " + order);
+			cmsTagExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
 		}
 		List<CmsTag> rows = cmsTagService.selectByExampleForOffsetPage(cmsTagExample, offset, limit);
 		long total = cmsTagService.countByExample(cmsTagExample);

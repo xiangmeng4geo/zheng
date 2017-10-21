@@ -8,6 +8,7 @@ import com.zheng.cms.rpc.api.CmsArticleService;
 import com.zheng.cms.rpc.api.CmsTagService;
 import com.zheng.common.base.BaseController;
 import com.zheng.common.util.Paginator;
+import com.zheng.common.util.StringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +50,7 @@ public class SearchController extends BaseController {
 				.andStatusEqualTo((byte) 1)
 				.andTitleLike(keyword);
 		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-			cmsArticleExample.setOrderByClause(sort + " " + order);
+			cmsArticleExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
 		}
 		List<CmsArticle> articles = cmsArticleService.selectByExampleForOffsetPage(cmsArticleExample, (page - 1) * rows, rows);
 		model.addAttribute("articles", articles);

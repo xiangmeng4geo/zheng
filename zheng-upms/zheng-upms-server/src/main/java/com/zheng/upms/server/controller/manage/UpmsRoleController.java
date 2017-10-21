@@ -6,6 +6,7 @@ import com.baidu.unbiz.fluentvalidator.ComplexResult;
 import com.baidu.unbiz.fluentvalidator.FluentValidator;
 import com.baidu.unbiz.fluentvalidator.ResultCollectors;
 import com.zheng.common.base.BaseController;
+import com.zheng.common.util.StringUtil;
 import com.zheng.common.validator.LengthValidator;
 import com.zheng.upms.common.constant.UpmsResult;
 import com.zheng.upms.common.constant.UpmsResultConstant;
@@ -87,7 +88,7 @@ public class UpmsRoleController extends BaseController {
             @RequestParam(required = false, value = "order") String order) {
         UpmsRoleExample upmsRoleExample = new UpmsRoleExample();
         if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-            upmsRoleExample.setOrderByClause(sort + " " + order);
+            upmsRoleExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
         }
         if (StringUtils.isNotBlank(search)) {
             upmsRoleExample.or()

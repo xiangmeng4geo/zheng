@@ -6,6 +6,7 @@ import com.zheng.cms.dao.model.CmsComment;
 import com.zheng.cms.dao.model.CmsCommentExample;
 import com.zheng.cms.rpc.api.CmsCommentService;
 import com.zheng.common.base.BaseController;
+import com.zheng.common.util.StringUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.StringUtils;
@@ -53,7 +54,7 @@ public class CmsCommentController extends BaseController {
 			@RequestParam(required = false, value = "order") String order) {
 		CmsCommentExample cmsCommentExample = new CmsCommentExample();
 		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-			cmsCommentExample.setOrderByClause(sort + " " + order);
+			cmsCommentExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
 		}
 		List<CmsComment> rows = cmsCommentService.selectByExampleWithBLOBsForOffsetPage(cmsCommentExample, offset, limit);
 		long total = cmsCommentService.countByExample(cmsCommentExample);

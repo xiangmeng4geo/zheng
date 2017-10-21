@@ -9,6 +9,7 @@ import com.zheng.cms.dao.model.CmsMenu;
 import com.zheng.cms.dao.model.CmsMenuExample;
 import com.zheng.cms.rpc.api.CmsMenuService;
 import com.zheng.common.base.BaseController;
+import com.zheng.common.util.StringUtil;
 import com.zheng.common.validator.LengthValidator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -57,7 +58,7 @@ public class CmsMenuController extends BaseController {
 			@RequestParam(required = false, value = "order") String order) {
 		CmsMenuExample cmsMenuExample = new CmsMenuExample();
 		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-			cmsMenuExample.setOrderByClause(sort + " " + order);
+			cmsMenuExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
 		}
 		List<CmsMenu> rows = cmsMenuService.selectByExampleForOffsetPage(cmsMenuExample, offset, limit);
 		long total = cmsMenuService.countByExample(cmsMenuExample);

@@ -6,6 +6,7 @@ import com.baidu.unbiz.fluentvalidator.ComplexResult;
 import com.baidu.unbiz.fluentvalidator.FluentValidator;
 import com.baidu.unbiz.fluentvalidator.ResultCollectors;
 import com.zheng.common.base.BaseController;
+import com.zheng.common.util.StringUtil;
 import com.zheng.common.validator.LengthValidator;
 import com.zheng.upms.common.constant.UpmsResult;
 import com.zheng.upms.common.constant.UpmsResultConstant;
@@ -78,7 +79,7 @@ public class UpmsPermissionController extends BaseController {
             criteria.andSystemIdEqualTo(systemId);
         }
         if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-            upmsPermissionExample.setOrderByClause(sort + " " + order);
+            upmsPermissionExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
         }
         if (StringUtils.isNotBlank(search)) {
             upmsPermissionExample.or()
